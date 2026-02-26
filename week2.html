@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Week 2 - Python Data Structures</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; }
+    h2 { margin-top: 40px; color: #2c3e50; }
+    pre {
+      background: #f4f4f4;
+      padding: 15px;
+      overflow-x: auto;
+      border-radius: 6px;
+    }
+    code { color: #c7254e; }
+    .theory {
+      background: #eef6ff;
+      padding: 10px;
+      border-left: 4px solid #3498db;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <h1>Week 2 - Python Data Structures</h1>
+
+    <!-- ================= PART A ================= -->
+
+    <h2>a) Creating Vectors of Different Types</h2>
+
+    <div class="theory">
+      <strong>Theory:</strong><br>
+      A vector is a one-dimensional array. Using NumPy, we can create vectors 
+      of different data types such as numeric, complex, logical (boolean), and character.
+    </div>
+
+    <pre><code>
+import numpy as np
+
+# Numeric vector
+numeric_vector = np.arange(1, 7)
+print("Numeric vector:", numeric_vector)
+
+# Complex vector
+complex_vector = np.array([1+2j, 2+3j, 3+4j, 4+5j, 5+6j, 6+7j])
+print("\nComplex vector:", complex_vector)
+
+# Logical vector
+logical_vector = np.array([True, False, True, False, True, False])
+print("\nLogical vector:", logical_vector)
+
+# Character vector
+char_vector = np.array(['a', 'b', 'c', 'd', 'e', 'f'])
+print("\nCharacter vector:", char_vector)
+    </code></pre>
+
+    <p><strong>Output:</strong></p>
+    <pre>
+Numeric vector: [1 2 3 4 5 6]
+Complex vector: [1.+2.j 2.+3.j 3.+4.j 4.+5.j 5.+6.j 6.+7.j]
+Logical vector: [ True False True False True False]
+Character vector: ['a' 'b' 'c' 'd' 'e' 'f']
+    </pre>
+
+
+    <!-- ================= PART B ================= -->
+
+    <h2>b) Creating a Matrix from a Vector</h2>
+
+    <div class="theory">
+      <strong>Theory:</strong><br>
+      A matrix is a two-dimensional array. We can reshape a vector into a matrix 
+      using NumPy and assign row and column names.
+    </div>
+
+    <h3>Method 1: Using NumPy</h3>
+
+    <pre><code>
+import numpy as np
+
+def create_matrix(vector, rows, cols, row_names, col_names):
+    if len(vector) != rows * cols:
+        raise ValueError("The number of elements must match rows * cols")
+
+    matrix = np.array(vector).reshape(rows, cols)
+
+    print("\nMatrix:")
+    print("  " + " ".join(col_names))
+    for i, row in enumerate(matrix):
+        print(f"{row_names[i]} {row}")
+
+# Example usage
+vector = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+rows, cols = 3, 3
+row_names = ["R1", "R2", "R3"]
+col_names = ["C1", "C2", "C3"]
+
+create_matrix(vector, rows, cols, row_names, col_names)
+    </code></pre>
+
+    <p><strong>Output:</strong></p>
+    <pre>
+Matrix:
+ C1 C2 C3
+R1 [1 2 3]
+R2 [4 5 6]
+R3 [7 8 9]
+    </pre>
+
+    <h3>Method 2: Using Pandas</h3>
+
+    <pre><code>
+import numpy as np
+import pandas as pd
+
+vector = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+matrix = np.array(vector).reshape(3, 3)
+
+row_names = ["Row1", "Row2", "Row3"]
+col_names = ["Col1", "Col2", "Col3"]
+
+df = pd.DataFrame(matrix, index=row_names, columns=col_names)
+
+print(df)
+    </code></pre>
+
+    <p><strong>Output:</strong></p>
+    <pre>
+      Col1 Col2 Col3
+Row1     1    2    3
+Row2     4    5    6
+Row3     7    8    9
+    </pre>
+
+
+    <!-- ================= PART C ================= -->
+
+    <h2>c) Finding Levels of a Factor</h2>
+
+    <div class="theory">
+      <strong>Theory:</strong><br>
+      A factor represents categorical data. Using Pandas, we can convert 
+      a list into a categorical type and retrieve its unique levels.
+    </div>
+
+    <pre><code>
+import pandas as pd
+
+vector = ["apple", "banana", "apple", "orange", "banana", "apple"]
+
+factor = pd.Categorical(vector)
+
+levels = factor.categories
+
+print("Levels of factor:", list(levels))
+    </code></pre>
+
+    <p><strong>Output:</strong></p>
+    <pre>
+Levels of factor: ['apple', 'banana', 'orange']
+    </pre>
+
+
+    <!-- ================= PART D ================= -->
+
+    <h2>d) Creating a List with Different Data Types</h2>
+
+    <div class="theory">
+      <strong>Theory:</strong><br>
+      Python lists can store different data types such as strings, numbers, 
+      NumPy vectors, and logical values.
+    </div>
+
+    <pre><code>
+import numpy as np
+
+my_list = [
+    "Hello",          # String
+    42,               # Integer
+    3.14,             # Float
+    np.array([1, 2, 3]),  # Vector
+    True,             # Boolean
+    False             # Boolean
+]
+
+for item in my_list:
+    print(item)
+    </code></pre>
+
+    <p><strong>Output:</strong></p>
+    <pre>
+Hello
+42
+3.14
+[1 2 3]
+True
+False
+    </pre>
+
+    <p><a class="link" href="index.html">← Back to Home</a></p>
+
+  </main>
+  <script src="copy.js"></script>
+</body>
+</html>

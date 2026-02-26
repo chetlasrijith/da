@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>R Programming Laboratory Record</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; }
+    h2 { margin-top: 35px; color: #2c3e50; }
+    pre {
+      background: #f4f4f4;
+      padding: 15px;
+      overflow-x: auto;
+      border-radius: 6px;
+    }
+    .aim {
+      background: #eef6ff;
+      padding: 10px;
+      border-left: 4px solid #3498db;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+<main class="container">
+
+<h1>R Programming Laboratory Record (Final)</h1>
+
+<p><strong>Dataset Used:</strong> weight-height.xlsx</p>
+<p><strong>Columns:</strong> Gender, Height, Weight</p>
+
+<hr>
+
+<h2>EXPERIMENT 1: Handling Packages in R</h2>
+<div class="aim"><strong>Aim:</strong> To install and load data analytics related packages in R.</div>
+<pre><code>
+install.packages(c("readxl", "tidyverse", "dplyr", "ggplot2", "plyr", "psych"))
+library(readxl)
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(plyr)
+library(psych)
+</code></pre>
+<p><strong>Result:</strong> Thus, data analytics related packages were successfully installed and loaded.</p>
+
+<hr>
+
+<h2>EXPERIMENT 2: Working with Directory</h2>
+<div class="aim"><strong>Aim:</strong> To set and verify the working directory.</div>
+<pre><code>
+setwd("D:/Rdata")
+getwd()
+list.files()
+</code></pre>
+
+<hr>
+
+<h2>EXPERIMENT 3: Reading Dataset</h2>
+<div class="aim"><strong>Aim:</strong> To read Excel dataset into R.</div>
+<pre><code>
+data <- read_excel("weight-height.xlsx")
+View(data)
+</code></pre>
+
+<hr>
+
+<h2>EXPERIMENT 4: Data Exploration Commands</h2>
+<div class="aim"><strong>Aim:</strong> To explore the dataset using basic commands.</div>
+<pre><code>
+dim(data)
+nrow(data)
+ncol(data)
+names(data)
+str(data)
+head(data)
+tail(data)
+</code></pre>
+
+<hr>
+
+<h2>EXPERIMENT 5: Data Summary</h2>
+<div class="aim"><strong>Aim:</strong> To generate summary statistics.</div>
+<pre><code>
+summary(data)
+</code></pre>
+
+<hr>
+
+<h2>EXPERIMENT 6: Descriptive Statistics</h2>
+<div class="aim"><strong>Aim:</strong> To calculate mean, median, standard deviation, and variance.</div>
+<pre><code>
+mean(data$Height, na.rm=TRUE)
+median(data$Height, na.rm=TRUE)
+sd(data$Height, na.rm=TRUE)
+var(data$Height, na.rm=TRUE)
+
+mean(data$Weight, na.rm=TRUE)
+median(data$Weight, na.rm=TRUE)
+sd(data$Weight, na.rm=TRUE)
+var(data$Weight, na.rm=TRUE)
+</code></pre>
+
+<hr>
+
+<h2>EXPERIMENT 7: Missing Values Identification</h2>
+<div class="aim"><strong>Aim:</strong> To identify missing values.</div>
+<pre><code>
+is.na(data)
+colSums(is.na(data))
+anyNA(data)
+</code></pre>
+
+<hr>
+
+<h2>EXPERIMENT 8: Missing Values Treatment</h2>
+<div class="aim"><strong>Aim:</strong> To handle missing values.</div>
+<pre><code>
+data_clean <- na.omit(data)
+</code></pre>
+
+<hr>
+
+<h2>EXPERIMENT 9: Using as Operator</h2>
+<div class="aim"><strong>Aim:</strong> To convert data types.</div>
+<pre><code>
+data$Gender <- as.factor(data$Gender)
+data$Height <- as.numeric(data$Height)
+data$Weight <- as.numeric(data$Weight)
+</code></pre>
+
+<hr>
+
+<h2>EXPERIMENT 10: Vectors</h2>
+<div class="aim"><strong>Aim:</strong> To create vectors.</div>
+<pre><code>
+height_vec <- c(data$Height)
+weight_vec <- c(data$Weight)
+</code></pre>
+
+<hr>
+
+<h2>EXPERIMENT 11: Matrices</h2>
+<div class="aim"><strong>Aim:</strong> To create matrix.</div>
+<pre><code>
+mat <- matrix(c(data$Height, data$Weight), ncol=2)
+colnames(mat) <- c("Height", "Weight")
+</code></pre>
+
+<hr>
+
+<h2>EXPERIMENT 12: Factors</h2>
+<div class="aim"><strong>Aim:</strong> To work with factors.</div>
+<pre><code>
+summary(data$Gender)
+levels(data$Gender)
+</code></pre>
+
+<hr>
+
+<h2>EXPERIMENT 13: Lists</h2>
+<div class="aim"><strong>Aim:</strong> To create list.</div>
+<pre><code>
+my_list <- list(Gender=data$Gender,
+ Height=data$Height,
+ Weight=data$Weight)
+</code></pre>
+
+<hr>
+
+<h2>EXPERIMENT 14: Aggregation using aggregate()</h2>
+<div class="aim"><strong>Aim:</strong> To find group-wise averages.</div>
+<pre><code>
+aggregate(Height ~ Gender, data=data, mean)
+aggregate(Weight ~ Gender, data=data, mean)
+</code></pre>
+
+<hr>
+
+<h2>EXPERIMENT 15: Group Processing using ddply()</h2>
+<div class="aim"><strong>Aim:</strong> To perform group-wise processing.</div>
+<pre><code>
+ddply(data, .(Gender), summarise,
+ Avg_Height = mean(Height),
+ Avg_Weight = mean(Weight))
+</code></pre>
+
+<hr>
+
+<h2>EXPERIMENT 16: Invalid Values and Outliers</h2>
+<div class="aim"><strong>Aim:</strong> To detect invalid values and outliers.</div>
+<pre><code>
+anyNA(data)
+boxplot(data$Height, main="Outliers in Height")
+boxplot(data$Weight, main="Outliers in Weight")
+</code></pre>
+
+<hr>
+
+<h2>EXPERIMENT 17: Spotting Problems using Visualization</h2>
+<div class="aim"><strong>Aim:</strong> To identify problems in data using visualization.</div>
+<pre><code>
+hist(data$Height, main="Histogram of Height", col="lightblue")
+hist(data$Weight, main="Histogram of Weight", col="lightgreen")
+plot(data$Height, data$Weight,
+ main="Height vs Weight",
+ xlab="Height", ylab="Weight")
+</code></pre>
+
+<hr>
+
+<h2>EXPERIMENT 18: Data Visualization</h2>
+<div class="aim"><strong>Aim:</strong> To visualize data using various plots.</div>
+<pre><code>
+hist(data$Height)
+boxplot(data$Weight)
+barplot(table(data$Gender))
+plot(data$Height, data$Weight)
+plot(density(data$Weight))
+</code></pre>
+
+<p><a href="index.html">← Back to Home</a></p>
+
+</main>
+<script src="copy.js"></script>
+</body>
+</html>

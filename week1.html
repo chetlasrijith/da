@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Week 1 - Introduction to Python</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; }
+    h2 { margin-top: 40px; color: #2c3e50; }
+    pre {
+      background: #f4f4f4;
+      padding: 15px;
+      overflow-x: auto;
+      border-radius: 6px;
+    }
+    .theory {
+      background: #eef6ff;
+      padding: 10px;
+      border-left: 4px solid #3498db;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <h1>Week 1 - Introduction to Python & Basic Programming</h1>
+
+    <!-- ================= PART A ================= -->
+
+    <h2>a) Sequence, Mean and Sum</h2>
+
+    <div class="theory">
+      This program demonstrates creation of sequences using range(), 
+      calculation of mean using NumPy, and sum using built-in functions.
+    </div>
+
+<pre><code>
+import numpy as np
+
+# Sequence from 20 to 50
+sequence = list(range(20, 51))
+print("Sequence of numbers from 20 to 50:", sequence)
+
+# Mean from 20 to 60
+mean_20_to_60 = np.mean(range(20, 61))
+print("Mean of numbers from 20 to 60:", mean_20_to_60)
+
+# Sum from 51 to 91
+sum_51_to_91 = sum(range(51, 92))
+print("Sum of numbers from 51 to 91:", sum_51_to_91)
+</code></pre>
+
+<pre>
+Output:
+Mean of numbers from 20 to 60: 40.0
+Sum of numbers from 51 to 91: 2911
+</pre>
+
+
+    <!-- ================= ODD / EVEN / MULTIPLES ================= -->
+
+    <h2>Odd, Even and Multiples</h2>
+
+<pre><code>
+# Odd numbers from 10 to 36
+odd_seq = [num for num in range(10, 37) if num % 2 != 0]
+print("Odd numbers:", odd_seq)
+
+# Even numbers from 10 to 36
+even_seq = [num for num in range(10, 37) if num % 2 == 0]
+print("Even numbers:", even_seq)
+
+# Multiples of 5 from 5 to 50
+multiples_5 = [num for num in range(5, 51) if num % 5 == 0]
+print("Multiples of 5:", multiples_5)
+</code></pre>
+
+
+    <!-- ================= MEAN OF ODD & EVEN ================= -->
+
+    <h2>Mean of Odd and Even Numbers</h2>
+
+<pre><code>
+# Mean of odd numbers (1 to 30)
+odd_numbers = [num for num in range(1, 31) if num % 2 != 0]
+mean_odd = sum(odd_numbers) / len(odd_numbers)
+print("Mean of odd numbers:", mean_odd)
+
+# Mean of even numbers (1 to 30)
+even_numbers = [num for num in range(1, 31) if num % 2 == 0]
+mean_even = sum(even_numbers) / len(even_numbers)
+print("Mean of even numbers:", mean_even)
+</code></pre>
+
+
+    <!-- ================= FIBONACCI ================= -->
+
+    <h2>b) Fibonacci Series</h2>
+
+    <div class="theory">
+      Fibonacci sequence: Each number is the sum of the previous two numbers.
+    </div>
+
+<pre><code>
+# First 10 Fibonacci numbers
+n = 10
+n1, n2 = 0, 1
+print(n1)
+print(n2)
+
+for i in range(3, n+1):
+    new = n1 + n2
+    print(new)
+    n1, n2 = n2, new
+</code></pre>
+
+<pre>
+Output:
+0
+1
+1
+2
+3
+5
+8
+13
+21
+34
+</pre>
+
+
+    <!-- ================= PRIME CHECK ================= -->
+
+    <h2>c) Prime Numbers</h2>
+
+    <div class="theory">
+      A prime number has exactly two factors: 1 and itself.
+    </div>
+
+<pre><code>
+# Check if a number is prime
+n = int(input("Enter n: "))
+count = 0
+
+for i in range(1, n+1):
+    if n % i == 0:
+        count += 1
+
+if count == 2:
+    print(n, "is prime")
+else:
+    print(n, "is not prime")
+</code></pre>
+
+<pre><code>
+# Print prime numbers from 1 to n
+n = int(input("Enter n: "))
+
+for i in range(1, n+1):
+    count = 0
+    for j in range(1, i+1):
+        if i % j == 0:
+            count += 1
+    if count == 2:
+        print(i)
+</code></pre>
+
+<pre>
+Output:
+2
+3
+5
+7
+</pre>
+
+    <p><a class="link" href="index.html">← Back to Home</a></p>
+
+  </main>
+  <script src="copy.js"></script>
+</body>
+</html>

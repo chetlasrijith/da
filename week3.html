@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Week 3 - Statistics in Python</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; }
+    h2 { margin-top: 40px; color: #2c3e50; }
+    pre {
+      background: #f4f4f4;
+      padding: 15px;
+      overflow-x: auto;
+      border-radius: 6px;
+    }
+    code { color: #c7254e; }
+    .theory {
+      background: #eef6ff;
+      padding: 10px;
+      border-left: 4px solid #3498db;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <h1>Week 3 - Programs using Statistics in Python</h1>
+
+    <p>
+      This section demonstrates the implementation of basic statistical concepts 
+      like <strong>Mean</strong> and <strong>Median</strong> using different Python libraries.
+    </p>
+
+    <!-- ================= MEAN ================= -->
+
+    <h2>1. Mean (Average)</h2>
+
+    <div class="theory">
+      <strong>Theory:</strong><br>
+      Mean is the average of a dataset.  
+      Formula: Mean = (Sum of all values) / (Number of values)
+    </div>
+
+    <h3>Using NumPy</h3>
+    <pre><code>
+import numpy as np
+
+data = [10, 20, 30, 40, 50]
+mean_value = np.mean(data)
+
+print("Mean using NumPy:", mean_value)
+    </code></pre>
+
+    <p><strong>Output:</strong> 30.0</p>
+
+    <h3>Using Python Built-in sum() and len()</h3>
+    <pre><code>
+data = [10, 20, 30, 40, 50]
+
+mean_value = sum(data) / len(data)
+
+print("Mean using built-in functions:", mean_value)
+    </code></pre>
+
+    <p><strong>Output:</strong> 30.0</p>
+
+    <h3>Using Pandas</h3>
+    <pre><code>
+import pandas as pd
+
+data = pd.Series([10, 20, 30, 40, 50])
+
+mean_value = data.mean()
+
+print("Mean using Pandas:", mean_value)
+    </code></pre>
+
+    <p><strong>Output:</strong> 30.0</p>
+
+    <h3>Using Statistics Module</h3>
+    <pre><code>
+import statistics
+
+data = [10, 20, 30, 40, 50]
+
+mean_value = statistics.mean(data)
+
+print("Mean using statistics module:", mean_value)
+    </code></pre>
+
+    <p><strong>Output:</strong> 30</p>
+
+
+    <!-- ================= MEDIAN ================= -->
+
+    <h2>2. Median</h2>
+
+    <div class="theory">
+      <strong>Theory:</strong><br>
+      Median is the middle value in a sorted dataset.  
+      If the number of values is even, median is the average of the two middle numbers.
+    </div>
+
+    <h3>Using NumPy</h3>
+    <pre><code>
+import numpy as np
+
+data = [10, 20, 30, 40, 50]
+
+median_value = np.median(data)
+
+print("Median using NumPy:", median_value)
+    </code></pre>
+
+    <p><strong>Output:</strong> 30.0</p>
+
+    <h3>Using Pandas</h3>
+    <pre><code>
+import pandas as pd
+
+data = [10, 20, 30, 40, 50]
+
+df = pd.Series(data)
+
+median_value = df.median()
+
+print("Median using Pandas:", median_value)
+    </code></pre>
+
+    <p><strong>Output:</strong> 30.0</p>
+
+    <h3>Using Statistics Module</h3>
+    <pre><code>
+import statistics
+
+data = [10, 20, 30, 40, 50]
+
+median_value = statistics.median(data)
+
+print("Median using statistics module:", median_value)
+    </code></pre>
+
+    <p><strong>Output:</strong> 30</p>
+
+    <h3>Using Python Built-in Method</h3>
+    <pre><code>
+def calculate_median(data):
+    sorted_data = sorted(data)
+    n = len(sorted_data)
+    mid = n // 2
+
+    if n % 2 == 0:
+        return (sorted_data[mid - 1] + sorted_data[mid]) / 2
+    else:
+        return sorted_data[mid]
+
+data = [10, 20, 30, 40, 50]
+
+median_value = calculate_median(data)
+
+print("Median using built-in method:", median_value)
+    </code></pre>
+
+    <p><strong>Output:</strong> 30</p>
+
+    <p><a class="link" href="index.html">← Back to Home</a></p>
+
+  </main>
+  <script src="copy.js"></script>
+</body>
+</html>
