@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Week 4</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+      body { font-family: Arial, sans-serif; line-height: 1.6; }
+      h2 { margin-top: 40px; color: #2c3e50; }
+      pre {
+        background: #f4f4f4;
+        padding: 15px;
+        overflow-x: auto;
+        border-radius: 6px;
+      }
+      code { color: #c7254e; }
+      .theory {
+        background: #eef6ff;
+        padding: 10px;
+        border-left: 4px solid #3498db;
+        margin-bottom: 10px;
+      }
+      .code-block {
+        position: relative;
+        margin: 1rem 0;
+      }
+      .copy-btn {
+        position: absolute;
+        right: 0.5rem;
+        top: 0.5rem;
+        padding: 0.25rem 0.5rem;    
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+    </style>
+    
+  </head>
+  <body>
+    <main class="container">
+      <h1>Week 4</h1>
+
+      <section>
+        <h2>Question a)</h2>
+        <p>
+          Consider the <strong>cars</strong> data set. Assume <strong>dist</strong> is the response variable
+          and <strong>speed</strong> is the predictor variable. Create a linear model using the <code>lm()</code>
+          function (R) or an equivalent in Python.
+        </p>
+
+        <h3>R (using <code>lm()</code>)</h3>
+        <pre><code>model &lt;- lm(dist ~ speed, data = cars)
+      summary(model)
+        </code></pre>
+
+        <h3>Python (using <code>statsmodels</code>)</h3>
+        <pre><code>import statsmodels.formula.api as smf
+
+      model = smf.ols('dist ~ speed', data=cars).fit()
+      print(model.summary())
+        </code></pre>
+      </section>
+
+      <p><a class="link" href="index.html">← Back to Home</a></p>
+    </main>
+    <script src="copy.js"></script>
+  </body>
+</html>

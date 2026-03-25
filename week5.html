@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Week 5</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+      body { font-family: Arial, sans-serif; line-height: 1.6; }
+      h2 { margin-top: 40px; color: #2c3e50; }
+      pre {
+        background: #f4f4f4;
+        padding: 15px;
+        overflow-x: auto;
+        border-radius: 6px;
+      }
+      code { color: #c7254e; }
+      .theory {
+        background: #eef6ff;
+        padding: 10px;
+        border-left: 4px solid #3498db;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <h1>Week 5</h1>
+
+      <section>
+        <h2>5). Programs using Logistic Regression.</h2>
+        <p>
+          Create a table with an ‘employee’ column that stores the necessary information including
+          each employee’s performance scores. Implement logistic regression to check whether an
+          employee is eligible for promotion or not based on his/her performance score. Also,
+          implement the multi-Linear Model, mle(), function for defining the maximum likelihood
+          estimation.
+        </p>
+
+        <h3>Code</h3>
+        <pre><code>import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+import statsmodels.api as sm
+
+data = {
+    'employee_id': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    'performance_score': [75, 82, 60, 90, 88, 70, 95, 68, 85, 78],
+    'promotion': [1, 1, 0, 1, 1, 0, 1, 0, 1, 1]
+}
+
+df = pd.DataFrame(data)
+
+X = df[['performance_score']]
+y = df['promotion']
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+logreg_model = LogisticRegression()
+logreg_model.fit(X_train, y_train)
+
+y_pred = logreg_model.predict(X_test)
+accuracy = accuracy_score(y_test, y_pred)
+print(f"Logistic Regression Accuracy: {accuracy}")
+
+X_train_sm = sm.add_constant(X_train)
+ml_model = sm.Logit(y_train, X_train_sm).fit(method='newton')
+
+print(ml_model.summary())
+
+new_employee_score = np.array([[80]])
+predicted_promotion = logreg_model.predict(new_employee_score)
+print(f"Predicted promotion for score 80 (Logistic Regression): {predicted_promotion[0]}")
+
+new_employee_score_sm = sm.add_constant(pd.DataFrame(new_employee_score, columns=['performance_score']))
+predicted_promotion_mle = ml_model.predict(new_employee_score_sm)
+print(f"Predicted promotion probability for score 80 (MLE): {predicted_promotion_mle[0]}")
+        </code></pre>
+
+      </section>
+
+      <p><a class="link" href="index.html">← Back to Home</a></p>
+    </main>
+    <script src="copy.js"></script>
+  </body>
+</html>

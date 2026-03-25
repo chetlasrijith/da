@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Case Study 2 - Weather Prediction Model</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+      body { font-family: Arial, sans-serif; line-height: 1.6; }
+      h2 { margin-top: 40px; color: #2c3e50; }
+      pre {
+        background: #f4f4f4;
+        padding: 15px;
+        overflow-x: auto;
+        border-radius: 6px;
+      }
+      code { color: #c7254e; }
+      .theory {
+        background: #eef6ff;
+        padding: 10px;
+        border-left: 4px solid #3498db;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <h1>Case Study-2 : Weather Prediction Model</h1>
+
+      <section>
+        <h2>Case Study-2 : Weather Prediction Model</h2>
+        <p>
+          Build a weather prediction model using a Decision Tree Classifier on a small synthetic dataset.
+        </p>
+
+        <h3>Code</h3>
+        <pre><code>import pandas as pd
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+data = {
+    'temperature': [25, 28, 22, 20, 27, 23, 26, 19, 30, 21],
+    'humidity': [60, 70, 55, 45, 65, 50, 75, 40, 80, 48],
+    'wind_speed': [10, 15, 8, 5, 12, 7, 18, 3, 20, 6],
+    'rain': [0, 1, 0, 0, 1, 0, 1, 0, 1, 0]
+}
+
+weather_df = pd.DataFrame(data)
+
+X = weather_df[['temperature', 'humidity', 'wind_speed']]
+y = weather_df['rain']
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+dt_classifier = DecisionTreeClassifier()
+dt_classifier.fit(X_train, y_train)
+
+y_pred = dt_classifier.predict(X_test)
+
+accuracy = accuracy_score(y_test, y_pred)
+print(f"Decision Tree Accuracy: {accuracy}")
+
+new_weather_data = pd.DataFrame({
+    'temperature': [24],
+    'humidity': [62],
+    'wind_speed': [9]
+})
+
+predicted_rain = dt_classifier.predict(new_weather_data)
+print(f"Predicted rain for new weather data: {predicted_rain[0]}")
+        </code></pre>
+
+      </section>
+
+      <p><a class="link" href="index.html">← Back to Home</a></p>
+    </main>
+    <script src="copy.js"></script>
+  </body>
+</html>

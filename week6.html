@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Week 6</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+      body { font-family: Arial, sans-serif; line-height: 1.6; }
+      h2 { margin-top: 40px; color: #2c3e50; }
+      pre {
+        background: #f4f4f4;
+        padding: 15px;
+        overflow-x: auto;
+        border-radius: 6px;
+      }
+      code { color: #c7254e; }
+      .theory {
+        background: #eef6ff;
+        padding: 10px;
+        border-left: 4px solid #3498db;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <h1>Week 6</h1>
+
+      <section>
+        <h2>6. Programs using Decision Trees.</h2>
+        <p>
+          a) Create a dataset that contains the features of apples. Now find out the “entropy” and
+          “information gain” for this dataset. Also, find out the best feature of the apple dataset.
+        </p>
+
+        <h3>Code</h3>
+        <pre><code>import pandas as pd
+import numpy as np
+from math import log2
+
+data = {
+    'Color': ['Red','Red','Green','Green','Yellow','Yellow'],
+    'Size': ['Big','Small','Big','Small','Big','Small'],
+    'Taste': ['Sweet','Sweet','Sour','Sour','Sweet','Sweet'],
+    'Quality': ['Good','Good','Bad','Bad','Good','Good']
+}
+
+df = pd.DataFrame(data)
+print("Apple Dataset:\n")
+print(df)
+
+def entropy(target):
+    values, counts = np.unique(target, return_counts=True)
+    ent = 0
+    for i in range(len(values)):
+        p = counts[i] / np.sum(counts)
+        ent -= p * log2(p)
+    return ent
+
+def information_gain(data, feature, target):
+    total_entropy = entropy(data[target])
+    values, counts = np.unique(data[feature], return_counts=True)
+    weighted_entropy = 0
+    for i in range(len(values)):
+        subset = data[data[feature] == values[i]]
+        weight = counts[i] / np.sum(counts)
+        weighted_entropy += weight * entropy(subset[target])
+    gain = total_entropy - weighted_entropy
+    return gain
+
+dataset_entropy = entropy(df['Quality'])
+print("\nEntropy of Dataset:", dataset_entropy)
+
+features = ['Color', 'Size', 'Taste']
+print("\nInformation Gain:")
+
+for feature in features:
+    ig = information_gain(df, feature, 'Quality')
+    print(feature, ":", ig)
+
+best_feature = max(features, key=lambda x: information_gain(df, x, 'Quality'))
+print("\nBest Feature:", best_feature)
+        </code></pre>
+
+      </section>
+
+      <p><a class="link" href="index.html">← Back to Home</a></p>
+    </main>
+    <script src="copy.js"></script>
+  </body>
+</html>
